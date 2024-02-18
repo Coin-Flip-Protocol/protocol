@@ -1,9 +1,11 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./IBlast.sol";
 
-contract CoinFlip {
+contract CoinFlip is Ownable {
     IBlast immutable yieldContract =
         IBlast(0x4300000000000000000000000000000000000002);
 
@@ -29,7 +31,7 @@ contract CoinFlip {
     uint public totalHeadsBets;
     uint public totalTailsBets;
 
-    constructor() {
+    constructor() Ownable(msg.sender) {
         // Initialise Blast Eth Yield if it's Blast Chain
         if (block.chainid == 168587773) {
             yieldContract.configureClaimableYield();
@@ -51,7 +53,7 @@ contract CoinFlip {
     }
 
     // Function to execute the coin flip
-    function flipCoin() external {
+    function flipCoin() external onlyOwner {
         require(addresses.length > 0, "No bets placed");
 
         // TODO: Implement Chainlink VRF on Mainnet: https://docs.chain.link/vrf
@@ -114,7 +116,7 @@ contract CoinFlip {
     }
 
     // Claim Eth Yield
-    function claimAllYield(address recipient) external {
+    function claimAllYield(address recipient) external onlyOwner {
         //This function is public meaning anyone can claim the yield
         yieldContract.claimAllYield(address(this), recipient);
     }
