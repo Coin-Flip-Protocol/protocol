@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
     "hardhat": "^2.20.1"
