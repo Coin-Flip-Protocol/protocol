@@ -1,13 +1,17 @@
 {
   "scripts": {
     "compile": "npx hardhat compile",
+    "deploy:test": "npx hardhat run scripts/deploy.ts --network blast_sepolia",
     "test": "npx hardhat test"
   },
   "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
+    "ethers": "^6.11.1",
     "hardhat": "^2.20.1"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.1"
+    "@openzeppelin/contracts": "^5.0.1",
+    "dotenv": "^16.4.4"
   }
 }
